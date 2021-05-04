@@ -27,3 +27,25 @@ post '/signup' do
   end
 end
 
+get '/login' do
+  erb(:login)
+end
+
+post '/login' do
+
+  email      = params[:email]
+  avatar_url = params[:avatar_url]
+  username   = params[:username]
+  password   = params[:password]
+  
+  @user = User.new({ email: email, avatar_url: avatar_url, username: username, password: password })
+  if @user.save
+  
+    "User #{username} saved!"
+  
+  else
+  
+    erb(:signup)
+  
+
+
