@@ -62,9 +62,15 @@ post '/finstagram_posts' do
   photo_url = params[:photo_url]
   
   @finstagram_post = FinstagramPost.new({ photo_url: photo_url, user_id: current_user.id })
+  
   if @finstagram_post.save
     redirect(to('/'))
   else
     erb(:"finstagram_posts/new")
   end
+end
+
+get '/finstagram_posts/:id' do
+  @finstagram_post = FinstagramPost.find(params[:id])
+  erb(:"finstagram_posts/show")
 end
